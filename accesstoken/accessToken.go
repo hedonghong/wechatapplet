@@ -7,6 +7,8 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
+// https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/access-token/auth.getAccessToken.html
+
 const urlPath = "/cgi-bin/token"
 
 type AccessToken struct {

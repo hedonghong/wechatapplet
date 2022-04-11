@@ -8,6 +8,8 @@ import (
 	"wechatapplet/common"
 )
 
+// https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html
+
 type EncryptedDataCrypt struct {
 	config *common.AppletConfig
 }

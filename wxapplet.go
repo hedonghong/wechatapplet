@@ -4,6 +4,7 @@ import (
 	"wechatapplet/accesstoken"
 	"wechatapplet/code2session"
 	"wechatapplet/common"
+	"wechatapplet/encrypteddata"
 	"wechatapplet/phonenumber"
 )
 
@@ -27,4 +28,12 @@ func (c *Client) NewCode2Session() *code2session.Code2Session {
 
 func (c *Client) NewPhoneNumer() *phonenumber.PhoneNumber {
 	return phonenumber.NewPhoneNumer(c.Config)
+}
+
+func (c *Client) NewEncryptedDataCrypt() *encrypteddata.EncryptedDataCrypt {
+	return encrypteddata.NewEncryptedDataCrypt(c.Config)
+}
+
+func (c *Client) NewEncryptedPhoneDataCrypt() *encrypteddata.EncryptedPhoneDataCrypt {
+	return encrypteddata.NewEncryptedPhoneDataCrypt(c.Config)
 }

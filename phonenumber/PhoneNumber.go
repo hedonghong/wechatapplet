@@ -7,6 +7,8 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
+// https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/phonenumber/phonenumber.getPhoneNumber.html
+
 const urlPath = "/wxa/business/getuserphonenumber"
 
 type PhoneNumber struct {

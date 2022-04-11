@@ -9,6 +9,8 @@ import (
 	"wechatapplet/phonenumber"
 )
 
+// https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html
+
 type EncryptedPhoneDataCrypt struct {
 	config *common.AppletConfig
 }

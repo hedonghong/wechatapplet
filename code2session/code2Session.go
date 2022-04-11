@@ -7,6 +7,8 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
+// https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html
+
 const urlPath = "/sns/jscode2session"
 
 type Code2Session struct {
