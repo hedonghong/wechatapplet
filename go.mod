@@ -1,4 +1,4 @@
-module wechatapplet
+module github.com/hedonghong/wechatapplet
 
 go 1.18
 
