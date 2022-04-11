@@ -1,4 +1,4 @@
-package encryptedData
+package encrypteddata
 
 import (
 	"crypto/aes"
@@ -6,15 +6,20 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"wechatapplet/common"
-	"wechatapplet/responses"
+	"wechatapplet/phonenumber"
 )
 
-var WxBizPhoneDataCrypt *wxBizPhoneDataCrypt
-
-type wxBizPhoneDataCrypt struct {
+type EncryptedPhoneDataCrypt struct {
+	config *common.AppletConfig
 }
 
-func (w *wxBizPhoneDataCrypt) DecryptData(sessionKey, encryptedData, iv string) (phoneInfo *responses.PhoneInfo, err error) {
+func NewEncryptedPhoneDataCrypt(config *common.AppletConfig) *EncryptedPhoneDataCrypt {
+	return &EncryptedPhoneDataCrypt{
+		config: config,
+	}
+}
+
+func (e *EncryptedPhoneDataCrypt) DecryptData(sessionKey, encryptedData, iv string) (res *phonenumber.PhoneInfo, err error) {
 	// utf8.RuneCountInString()
 	if len(sessionKey) != 24 {
 		err = &common.CommonError{common.ILLEGALAESKEY, "session_key长度错误"}
@@ -52,9 +57,9 @@ func (w *wxBizPhoneDataCrypt) DecryptData(sessionKey, encryptedData, iv string) 
 
 	cipher.NewCBCDecrypter(cipherBlock, aesIv).CryptBlocks(aesCipher, aesCipher)
 
-	aesCipher = PKCS5UnPadding(aesCipher)
+	aesCipher = common.PKCS5UnPadding(aesCipher)
 
-	if err = json.Unmarshal(aesCipher, &phoneInfo); err != nil {
+	if err = json.Unmarshal(aesCipher, &res); err != nil {
 		return
 	}
 	return

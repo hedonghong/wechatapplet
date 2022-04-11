@@ -2,27 +2,35 @@ package phonenumber
 
 import (
 	"encoding/json"
-	"github.com/valyala/fasthttp"
 	"wechatapplet/common"
-	"wechatapplet/requests"
-	"wechatapplet/responses"
+
+	"github.com/valyala/fasthttp"
 )
 
-var PhoneNumber phoneNumber
+const urlPath = "/wxa/business/getuserphonenumber"
 
-type phoneNumber struct {
+type PhoneNumber struct {
+	config *common.AppletConfig
+	ApiUrl string
 }
 
-func (p *phoneNumber) GetPhoneNumber(param requests.PhoneNumber) (phoneNumberData *responses.PhoneNumberData, err error) {
+func NewPhoneNumer(config *common.AppletConfig) *PhoneNumber {
+	return &PhoneNumber{
+		config: config,
+		ApiUrl: config.AppHost + urlPath,
+	}
+}
+
+func (p *PhoneNumber) GetPhoneNumber(req PhoneNumberReq) (res *PhoneNumberRes, err error) {
 	args := &fasthttp.Args{}
-	args.Add("access_token", param.AccessToken)
-	args.Add("code", param.Code)
-	_, bodyByte, err := fasthttp.Post(nil, common.Config.PhonenumberGetPhoneNumberUri, args)
+	args.Add("access_token", req.AccessToken)
+	args.Add("code", req.Code)
+	_, bodyByte, err := fasthttp.Post(nil, p.ApiUrl, args)
 	if err != nil {
 		return
 	}
 	if len(bodyByte) > 0 {
-		if err = json.Unmarshal(bodyByte, &phoneNumberData); err != nil {
+		if err = json.Unmarshal(bodyByte, &res); err != nil {
 			return
 		}
 	}

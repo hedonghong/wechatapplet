@@ -1,8 +1,9 @@
-package encryptedData
+package encrypteddata
 
 import (
 	"fmt"
 	"testing"
+	"wechatapplet/common"
 )
 
 var (
@@ -18,6 +19,11 @@ var (
 )
 
 func TestWXBizDataCrypt_DecryptData(t *testing.T) {
-	object, _ := WXBizDataCrypt.SetParam(appid, sessionKey).DecryptData(encryptedData, iv)
+	service := NewEncryptedDataCrypt(&common.AppletConfig{
+		Appid:     "",
+		AppSecret: "",
+		AppHost:   "",
+	})
+	object, _ := service.DecryptData(sessionKey, encryptedData, iv)
 	fmt.Printf("%+v", object)
 }

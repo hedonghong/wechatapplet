@@ -1,4 +1,4 @@
-package encryptedData
+package encrypteddata
 
 import (
 	"crypto/aes"
@@ -6,34 +6,26 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"wechatapplet/common"
-	"wechatapplet/responses"
 )
 
-var WXBizDataCrypt *wXBizDataCrypt
-
-type wXBizDataCrypt struct {
-	Appid      string
-	SessionKey string
+type EncryptedDataCrypt struct {
+	config *common.AppletConfig
 }
 
-func init() {
-	WXBizDataCrypt = &wXBizDataCrypt{}
+func NewEncryptedDataCrypt(config *common.AppletConfig) *EncryptedDataCrypt {
+	return &EncryptedDataCrypt{
+		config: config,
+	}
 }
 
-func (w *wXBizDataCrypt) SetParam(appid, sessionKey string) *wXBizDataCrypt {
-	w.Appid = appid
-	w.SessionKey = sessionKey
-	return w
-}
-
-func (w *wXBizDataCrypt) DecryptData(encryptedData, iv string) (cryptedData *responses.CryptedData, err error) {
+func (e *EncryptedDataCrypt) DecryptData(sessionKey, encryptedData, iv string) (res *CryptedDataRes, err error) {
 	// utf8.RuneCountInString()
-	if len(w.SessionKey) != 24 {
+	if len(sessionKey) != 24 {
 		err = &common.CommonError{common.ILLEGALAESKEY, "session_key长度错误"}
 		return
 	}
 
-	aesKey, err := base64.StdEncoding.DecodeString(w.SessionKey)
+	aesKey, err := base64.StdEncoding.DecodeString(sessionKey)
 
 	if err != nil {
 		return
@@ -64,19 +56,10 @@ func (w *wXBizDataCrypt) DecryptData(encryptedData, iv string) (cryptedData *res
 
 	cipher.NewCBCDecrypter(cipherBlock, aesIv).CryptBlocks(aesCipher, aesCipher)
 
-	aesCipher = PKCS5UnPadding(aesCipher)
+	aesCipher = common.PKCS5UnPadding(aesCipher)
 
-	if err = json.Unmarshal(aesCipher, &cryptedData); err != nil {
+	if err = json.Unmarshal(aesCipher, &res); err != nil {
 		return
 	}
 	return
-}
-
-func PKCS5UnPadding(src []byte) []byte {
-	length := len(src)
-	unpadding := int(src[length-1])
-	if length-unpadding < 0 {
-		return []byte("")
-	}
-	return src[:(length - unpadding)]
 }

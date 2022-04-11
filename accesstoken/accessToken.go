@@ -2,27 +2,36 @@ package accesstoken
 
 import (
 	"encoding/json"
-	"github.com/valyala/fasthttp"
 	"wechatapplet/common"
-	"wechatapplet/responses"
+
+	"github.com/valyala/fasthttp"
 )
 
-var AccessToken accessToken
+const urlPath = "/cgi-bin/token"
 
-type accessToken struct {
+type AccessToken struct {
+	config *common.AppletConfig
+	ApiUrl string
 }
 
-func (g *accessToken) GetAccessToken() (accessToken *responses.AccessTokenData, err error) {
+func NewAccessToken(config *common.AppletConfig) *AccessToken {
+	return &AccessToken{
+		config: config,
+		ApiUrl: config.AppHost + urlPath,
+	}
+}
+
+func (a *AccessToken) GetAccessToken() (res *AccessTokenRes, err error) {
 	param := fasthttp.Args{}
-	param.Add("appid", common.Config.Appid)
-	param.Add("secret", common.Config.AppSecret)
+	param.Add("appid", a.config.Appid)
+	param.Add("secret", a.config.AppSecret)
 	param.Add("grant_type", "client_credential")
-	_, bodyByte, err := fasthttp.Get(nil, common.Config.AuthGetAccessTokenUri+param.String())
+	_, bodyByte, err := fasthttp.Get(nil, a.ApiUrl+"?"+param.String())
 	if err != nil {
 		return
 	}
 	if len(bodyByte) > 0 {
-		if err = json.Unmarshal(bodyByte, &accessToken); err != nil {
+		if err = json.Unmarshal(bodyByte, &res); err != nil {
 			return
 		}
 	}

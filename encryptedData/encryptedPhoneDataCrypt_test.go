@@ -1,13 +1,19 @@
-package encryptedData
+package encrypteddata
 
 import (
 	"fmt"
 	"testing"
+	"wechatapplet/common"
 )
 
 func TestEncryptedPhoneDataCrypt_DecryptData(t *testing.T) {
+	service := NewEncryptedPhoneDataCrypt(&common.AppletConfig{
+		Appid:     "",
+		AppSecret: "",
+		AppHost:   "",
+	})
 	sessionKey := "5KnrPuuu3KrKn7blXOgYmg=="
-	phone, _ := WxBizPhoneDataCrypt.DecryptData(
+	phone, _ := service.DecryptData(
 		sessionKey,
 		"9iGbxLwHLXDi/XV27Wt3xM9P8ShbFpwOQReM4G0eqoqZ+0hdZMReRTCrWYc0BujeqXvrhckENoqwt2VI+QNSxAXvh3hFkWp7z5uyB5tNKLmBkZRGko0iQqmMChdFOZX9P5DCGUlQgXmb2dwAVpDLD7OiwL7x336L+V6C9QF4N1vVJASBNV2FnS8c4yL33+aFIwoGTsDeRNKUL9GT5SviVQ==",
 		"g2VT9ikWPvaS9uKtj6SDYQ==",

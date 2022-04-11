@@ -3,11 +3,16 @@ package code2session
 import (
 	"fmt"
 	"testing"
-	"wechatapplet/requests"
+	"wechatapplet/common"
 )
 
 func TestCode2Session_GetSession(t *testing.T) {
-	session, _ := Code2Session.GetSession(requests.WxLogin{
+	service := NewCode2Session(&common.AppletConfig{
+		Appid:     "",
+		AppSecret: "",
+		AppHost:   "",
+	})
+	session, _ := service.GetSession(Code2SessionReq{
 		Code: "021Uvp0w3Xi6jY2bQ63w34WIZj4Uvp0z",
 	})
 	fmt.Printf("%+v", session)
