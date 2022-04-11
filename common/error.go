@@ -1,4 +1,4 @@
-package wechatapplet
+package common
 
 import "fmt"
 

@@ -1,10 +1,11 @@
-package wechatapplet
+package encryptedData
 
 import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
 	"encoding/json"
+	"wechatapplet/common"
 	"wechatapplet/responses"
 )
 
@@ -16,7 +17,7 @@ type wxBizPhoneDataCrypt struct {
 func (w *wxBizPhoneDataCrypt) DecryptData(sessionKey, encryptedData, iv string) (phoneInfo *responses.PhoneInfo, err error) {
 	// utf8.RuneCountInString()
 	if len(sessionKey) != 24 {
-		err = &CommonError{ILLEGALAESKEY, "session_key长度错误"}
+		err = &common.CommonError{common.ILLEGALAESKEY, "session_key长度错误"}
 		return
 	}
 
@@ -27,7 +28,7 @@ func (w *wxBizPhoneDataCrypt) DecryptData(sessionKey, encryptedData, iv string) 
 	}
 
 	if len(iv) != 24 {
-		err = &CommonError{ILLEGALIV, "iv长度错误"}
+		err = &common.CommonError{common.ILLEGALIV, "iv长度错误"}
 		return
 	}
 

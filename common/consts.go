@@ -1,4 +1,4 @@
-package wechatapplet
+package common
 
 const (
 	ILLEGALAESKEY = -41001

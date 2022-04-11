@@ -1,8 +1,9 @@
-package wechatapplet
+package phonenumber
 
 import (
 	"encoding/json"
 	"github.com/valyala/fasthttp"
+	"wechatapplet/common"
 	"wechatapplet/requests"
 	"wechatapplet/responses"
 )
@@ -16,7 +17,7 @@ func (p *phoneNumber) GetPhoneNumber(param requests.PhoneNumber) (phoneNumberDat
 	args := &fasthttp.Args{}
 	args.Add("access_token", param.AccessToken)
 	args.Add("code", param.Code)
-	_, bodyByte, err := fasthttp.Post(nil, Config.PhonenumberGetPhoneNumberUri, args)
+	_, bodyByte, err := fasthttp.Post(nil, common.Config.PhonenumberGetPhoneNumberUri, args)
 	if err != nil {
 		return
 	}

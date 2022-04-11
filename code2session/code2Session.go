@@ -1,8 +1,9 @@
-package wechatapplet
+package code2session
 
 import (
 	"encoding/json"
 	"github.com/valyala/fasthttp"
+	"wechatapplet/common"
 	"wechatapplet/requests"
 	"wechatapplet/responses"
 )
@@ -18,11 +19,11 @@ func init() {
 
 func (c *code2Session) GetSession(wxLogin requests.WxLogin) (code2Session *responses.Code2SessionData, err error) {
 	param := fasthttp.Args{}
-	param.Add("appid", Config.Appid)
-	param.Add("secret", Config.AppSecret)
+	param.Add("appid", common.Config.Appid)
+	param.Add("secret", common.Config.AppSecret)
 	param.Add("js_code", wxLogin.Code)
 	param.Add("grant_type", "authorization_code")
-	_, bodyByte, err := fasthttp.Get(nil, Config.AuthCode2SessionUri+param.String())
+	_, bodyByte, err := fasthttp.Get(nil, common.Config.AuthCode2SessionUri+param.String())
 	if err != nil {
 		return
 	}

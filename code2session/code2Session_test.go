@@ -1,4 +1,4 @@
-package wechatapplet
+package code2session
 
 import (
 	"fmt"

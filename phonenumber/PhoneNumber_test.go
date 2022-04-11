@@ -1,4 +1,4 @@
-package wechatapplet
+package phonenumber
 
 import (
 	"fmt"

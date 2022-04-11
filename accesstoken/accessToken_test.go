@@ -1,4 +1,4 @@
-package wechatapplet
+package accesstoken
 
 import (
 	"fmt"
