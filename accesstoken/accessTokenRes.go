@@ -1,6 +1,6 @@
 package accesstoken
 
-import "wechatapplet/common"
+import "github.com/hedonghong/wechatapplet/common"
 
 type AccessTokenRes struct {
 	AccessToken string `json:"access_token"`

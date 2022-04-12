@@ -1,6 +1,6 @@
 package phonenumber
 
-import "wechatapplet/common"
+import "github.com/hedonghong/wechatapplet/common"
 
 type PhoneInfo struct {
 	PhoneNumber     string            `json:"phoneNumber"`     // 用户绑定的手机号（国外手机号会有区号）

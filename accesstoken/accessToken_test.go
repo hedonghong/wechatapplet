@@ -2,8 +2,8 @@ package accesstoken
 
 import (
 	"fmt"
+	"github.com/hedonghong/wechatapplet/common"
 	"testing"
-	"wechatapplet/common"
 )
 
 func TestAccessToken_GetAccessToken(t *testing.T) {

@@ -5,8 +5,8 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"encoding/json"
-	"wechatapplet/common"
-	"wechatapplet/phonenumber"
+	"github.com/hedonghong/wechatapplet/common"
+	"github.com/hedonghong/wechatapplet/phonenumber"
 )
 
 // https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html

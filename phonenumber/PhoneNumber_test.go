@@ -2,8 +2,8 @@ package phonenumber
 
 import (
 	"fmt"
+	"github.com/hedonghong/wechatapplet/common"
 	"testing"
-	"wechatapplet/common"
 )
 
 func TestPhoneNumber_GetPhoneNumber(t *testing.T) {

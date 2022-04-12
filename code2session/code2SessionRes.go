@@ -1,6 +1,6 @@
 package code2session
 
-import "wechatapplet/common"
+import "github.com/hedonghong/wechatapplet/common"
 
 type Code2SessionRes struct {
 	Openid     string `json:"openid"`

@@ -1,6 +1,6 @@
 package encrypteddata
 
-import "wechatapplet/common"
+import "github.com/hedonghong/wechatapplet/common"
 
 type CryptedDataRes struct {
 	OpenId    string            `json:"openId"`

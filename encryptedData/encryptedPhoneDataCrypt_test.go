@@ -2,8 +2,8 @@ package encrypteddata
 
 import (
 	"fmt"
+	"github.com/hedonghong/wechatapplet/common"
 	"testing"
-	"wechatapplet/common"
 )
 
 func TestEncryptedPhoneDataCrypt_DecryptData(t *testing.T) {

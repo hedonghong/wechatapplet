@@ -2,7 +2,7 @@ package phonenumber
 
 import (
 	"encoding/json"
-	"wechatapplet/common"
+	"github.com/hedonghong/wechatapplet/common"
 
 	"github.com/valyala/fasthttp"
 )

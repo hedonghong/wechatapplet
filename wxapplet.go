@@ -1,11 +1,11 @@
 package wechatapplet
 
 import (
-	"wechatapplet/accesstoken"
-	"wechatapplet/code2session"
-	"wechatapplet/common"
-	"wechatapplet/encrypteddata"
-	"wechatapplet/phonenumber"
+	"github.com/hedonghong/wechatapplet/accesstoken"
+	"github.com/hedonghong/wechatapplet/code2session"
+	"github.com/hedonghong/wechatapplet/common"
+	"github.com/hedonghong/wechatapplet/encrypteddata"
+	"github.com/hedonghong/wechatapplet/phonenumber"
 )
 
 type Client struct {

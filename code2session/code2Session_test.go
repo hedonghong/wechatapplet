@@ -2,8 +2,8 @@ package code2session
 
 import (
 	"fmt"
+	"github.com/hedonghong/wechatapplet/common"
 	"testing"
-	"wechatapplet/common"
 )
 
 func TestCode2Session_GetSession(t *testing.T) {
